@@ -1,11 +1,29 @@
 //Рисуем фон
 window.renderStatistics = function (ctx, names, times) {
-  ctx.fillStyle = 'rgba(0, 0, 0, 0.7)';
-  ctx.fillRect(110, 20, 420, 270);
+  ctx.shadowOffsetX = 10;
+  ctx.shadowOffsetY = 10;
+  ctx.shadowColor = 'rgba(0, 0, 0, 0.7)';
 
   ctx.fillStyle = '#ffffff';
-  ctx.strokeRect(100, 10, 420, 270);
-  ctx.fillRect(100, 10, 420, 270);
+  ctx.beginPath();
+  ctx.bezierCurveTo(120, 105, 50, 20, 150, 20);
+  ctx.bezierCurveTo(150, 20, 180, 5, 240, 20);
+  ctx.bezierCurveTo(240, 20, 310, 0, 360, 20);
+  ctx.bezierCurveTo(360, 20, 535, 0, 495, 50);
+  ctx.bezierCurveTo(495, 50, 545, 80, 505, 100);
+  ctx.bezierCurveTo(505, 100, 585, 180, 505, 220);
+  ctx.bezierCurveTo(505, 220, 545, 290, 445, 275);
+  ctx.bezierCurveTo(445, 275, 395, 310, 315, 270);
+  ctx.bezierCurveTo(315, 270, 235, 310, 210, 275);
+  ctx.bezierCurveTo(210, 275, 105, 320, 115, 230);
+  ctx.bezierCurveTo(115, 230, 35, 170, 120, 105);
+  ctx.closePath();
+  ctx.stroke();
+  ctx.fill();
+
+  ctx.shadowOffsetX = 0;
+  ctx.shadowOffsetY = 0;
+  ctx.shadowColor = 'transparent';
 
   ctx.fillStyle = '#000000';
   ctx.font = '16px PT Mono';
