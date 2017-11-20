@@ -1,4 +1,5 @@
-//Рисуем фон
+'use strict';
+// Рисуем фон
 window.renderStatistics = function (ctx, names, times) {
   ctx.shadowOffsetX = 10;
   ctx.shadowOffsetY = 10;
@@ -29,19 +30,19 @@ window.renderStatistics = function (ctx, names, times) {
   ctx.font = '16px PT Mono';
   ctx.fillText('Ура вы победили!\nСписок результатов:', 140, 40);
 
-//Находим максимальное время для определения высоты колонок
+  // Находим максимальное время для определения высоты колонок
   var maxTime = 0;
   var maxIndex = 0;
 
-  for (var i = 0; i <= times.length - 1; i++) {
-    if (times[i] > maxTime) {
-      maxTime = times[i];
-      maxIndex = i;
+  for (var j = 0; j <= times.length - 1; j++) {
+    if (times[j] > maxTime) {
+      maxTime = times[j];
+      maxIndex = j;
     }
   }
   ctx.fillText('Худшее время: ' + Math.round(maxTime) + ' мс у игрока ' + names[maxIndex], 140, 60);
 
-//Находим высоту и координаты каждой колонки
+  // Находим высоту и координаты каждой колонки
   var histogramHeight = 150;
   var step = histogramHeight / maxTime;
   var histogramWidth = 40;
@@ -51,7 +52,7 @@ window.renderStatistics = function (ctx, names, times) {
   var indentY = 10;
   var lineHeight = 20;
 
-  for  (var i = 0; i <= times.length - 1; i++) {
+  for (var i = 0; i <= times.length - 1; i++) {
     if (names[i] === 'Вы') {
       ctx.fillStyle = 'rgba(255, 0, 0, 1)';
     } else {
