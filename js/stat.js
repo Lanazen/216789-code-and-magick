@@ -31,16 +31,8 @@ window.renderStatistics = function (ctx, names, times) {
   ctx.fillText('Ура вы победили!\nСписок результатов:', 140, 40);
 
   // Находим максимальное время для определения высоты колонок
-  var maxTime = 0;
-  var maxIndex = 0;
-
-  for (var j = 0; j <= times.length - 1; j++) {
-    if (times[j] > maxTime) {
-      maxTime = times[j];
-      maxIndex = j;
-    }
-  }
-  ctx.fillText('Худшее время: ' + Math.round(maxTime) + ' мс у игрока ' + names[maxIndex], 140, 60);
+  var maxTime = Math.max.apply(null, times);
+  ctx.fillText('Худшее время: ' + Math.round(maxTime) + ' мс у игрока ' + names, 140, 60);
 
   // Находим высоту и координаты каждой колонки
   var histogramHeight = 150;
@@ -52,16 +44,12 @@ window.renderStatistics = function (ctx, names, times) {
   var indentY = 10;
   var lineHeight = 20;
 
-  for (var i = 0; i <= times.length - 1; i++) {
-    if (names[i] === 'Вы') {
-      ctx.fillStyle = 'rgba(255, 0, 0, 1)';
-    } else {
-      ctx.fillStyle = 'rgba(0, 0, 255, ' + (0.1 + Math.random()).toFixed(1) + ')';
-    }
+  var showResults = function (userTime, i) {
+    ctx.fillStyle = (names[i] === 'Вы') ? 'rgba(255, 0, 0, 1)' : 'rgba(0, 0, 255, ' + (0.1 + Math.random()).toFixed(1) + ')';
     ctx.fillRect(initialX + (histogramWidth + indentX) * i, initialY + indentY + (initialX - times[i] * step), histogramWidth, times[i] * step);
-
     ctx.fillStyle = 'rgba(0, 0, 0, 1)';
     ctx.fillText(Math.round(times[i]), initialX + (histogramWidth + indentX) * i, initialY + (initialX - times[i] * step));
     ctx.fillText(names[i], initialX + (histogramWidth + indentX) * i, initialY + indentY + histogramHeight + lineHeight);
-  }
+  };
+  times.forEach(showResults);
 };
